@@ -1,0 +1,711 @@
+@charset "UTF-8";
+@import url(style.css);
+
+/********************************************* login *********************************************/
+#login {
+  position: relative;
+  margin: 0 auto;
+  min-height: 32rem;
+  height: 100vh;
+  background: #fff;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.login__left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 60%;
+  height: 100%;
+  background: #003876;
+  text-align: center;
+  color: #fff;
+}
+.left__top {
+  position: fixed;
+  left: 2.5rem;
+  top: 2.25rem;
+  width: 4.5rem;
+  height: 2.125rem;
+  background: url("../img/icon_logo_login.png") no-repeat center center;
+  background-size: 100%;
+}
+.left__center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.left__center:after {
+  content: "";
+  width: 32.375rem;
+  height: 11.263rem;
+  padding-top: 5.365rem;
+  background: url("../img/bg_login.png") no-repeat center bottom;
+}
+.left__center p {
+  font-size: 2rem;
+  font-weight: 100;
+  line-height: 2.25rem;
+  margin-bottom: 18px;
+  color: #fff;
+}
+.left__center h1 {
+  width: 331px;
+  height: 35px;
+  font-size: 2.375rem;
+  font-weight: 700;
+  line-height: 2.625rem;
+  color: #fff;
+}
+.left__bottom {
+  position: fixed;
+  left: 2.5rem;
+  bottom: 2.5rem;
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: #fff;
+}
+.login__right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 40%;
+  height: 100%;
+}
+.login__right h2 p {
+  font-size: 1.375rem;
+  font-weight: 500;
+  color: #2a2c2f;
+}
+.login__right h2 p:first-child {
+  display: none;
+}
+.login__form .form__input {
+  margin: 2.25rem 0 1.938rem;
+}
+.login__form .form__input li {
+  margin-top: 1rem;
+}
+.login__form .form__input li:first-child {
+  margin-top: 0;
+}
+.login__form .form__input .input__area {
+  margin-left: 0;
+}
+.login__form .form__input input[type="text"],
+.login__form .form__input input[type="password"] {
+  width: 19.125rem;
+  height: 2.75rem;
+  padding: 0 1rem;
+}
+.login__form .input-errortxt {
+  top: 3rem;
+  font-size: 0.875rem;
+  line-height: 1;
+}
+.form__etc {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.form__etc li:last-child {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.form__etc button:first-child:before {
+  content: none;
+}
+.form__etc button::before {
+  content: "";
+  width: 1px;
+  height: 0.658rem;
+  margin-left: 0.499rem;
+  padding-left: 0.499rem;
+  border-left: 1px solid #909fb7;
+}
+.form__etc button span {
+  font-size: 0.875rem;
+}
+.btn-login {
+  margin: 1.813rem 0 1rem;
+  background: #0a78ff;
+  border: 0;
+  width: 21.25rem;
+  height: 2.875rem;
+}
+.btn-login:hover,
+.btn-login:active {
+  background: #0050b8;
+}
+.btn-login:disabled {
+  background: #e9edef;
+}
+.btn-login span {
+  color: #fff;
+}
+.join {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.join li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.join li p {
+  color: #909fb7;
+  margin-right: 0.5rem;
+}
+.join__sns {
+  margin: 3rem 0 3.5rem;
+}
+.join__sns button {
+  width: 3rem;
+  height: 3rem;
+  background: #909fb7;
+  border-radius: 50%;
+  margin-left: 2rem;
+}
+.join__sns button:first-child {
+  margin-left: 0;
+}
+.join__sns button.kakao {
+  background: url("../img/icon_kakao.png") no-repeat center center #fae34c;
+  background-size: 1.375rem;
+}
+.join__sns button.naver {
+  background: url("../img/icon_naver.png") no-repeat center center #03c75a;
+  background-size: 1.25rem;
+}
+.select-lang {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.select-lang button {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 1.5rem;
+  margin-left: 4.375rem;
+}
+.select-lang button:first-child {
+  margin-left: 0;
+}
+.select-lang button:hover:after,
+.select-lang button:active:after,
+.select-lang button.on:after {
+  content: "";
+  display: block;
+  width: 100%;
+  padding-bottom: 0.375rem;
+  border-bottom: 2px solid #0a78ff;
+}
+.select-lang button span {
+  color: #909fb7;
+}
+.select-lang button:hover span,
+.select-lang button:active span,
+.select-lang button.on span {
+  color: #0a78ff;
+}
+
+/* popup */
+.login__popup.popup-layer {
+  width: 28.75rem;
+  /* min-height: 19.125rem; */
+}
+.login__popup .popup__body {
+  width: calc(100% - 5rem);
+  padding: 2rem 2.5rem 4.125rem;
+}
+.login__popup.popup-layer.w560 .popup__body .form__input label {
+  width: 49%;
+}
+/* 회원가입 완료 */
+/* .joinok {
+  margin-bottom: -40px;
+  margin-top: -25px !important;
+} */
+.joinok:before {
+  content: "";
+  width: 200px;
+  height: 108px;
+  display: block;
+  margin: 0 auto 16px;
+  background: url("../img/bg_joinok.png") no-repeat center center;
+  /* background-size: 1.25rem; */
+}
+.login__popup .popup__body.joinok-h {
+  padding: 2rem 2.5rem 8.7rem;
+}
+.login__popup .popup__body.joinok-h .complete-txt {
+  height: calc(75vh - 8.9rem);
+}
+.login__popup .popup__body.joinok-h .complete-txt button {
+  margin-top: 33px;
+  padding: 0 1.25rem;
+  width: 8.75rem;
+  height: 2.5rem;
+  background-color: #0a78ff;
+  border: 0;
+}
+.login__popup .popup__body.joinok-h .complete-txt button span {
+  color: #fff;
+  font-weight: 700;
+}
+.login__popup .popup__body.joinok-h .complete-txt button:hover {
+  background-color: #0050b8;
+}
+.login__popup .popup__body.joinok-h .complete-txt button:active {
+  background-color: #003876;
+}
+/* .login__popup .input__direct {
+  width: 100%;
+  margin-left: 2rem;
+} */
+.input__direct .input-error + .btn-delete {
+  display: none;
+}
+
+/*회원가입완료_웹메일용*/
+.login__popup .popup__body.joinok-h.webmail .joinok {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 26px;
+  text-align: center;
+  letter-spacing: -0.64px;
+  color: #2a2c2f;
+}
+.login__popup .popup__body.joinok-h.webmail .joinok:before {
+  content: "";
+  width: 180px;
+  height: 180px;
+  display: block;
+  margin-bottom: 26px;
+  background: url("../img/bg_joinok_webmail.png") no-repeat center center;
+  background-size: 100%;
+}
+.login__popup .popup__body.joinok-h.webmail .complete-txt button {
+  margin-top: 48px;
+  padding: 0;
+}
+.login__popup .popup__body.joinok-h.webmail .joininfo {
+  margin-top: 26px;
+}
+.login__popup .popup__body.joinok-h.webmail .joininfo p {
+  font-weight: 400;
+  line-height: 20px;
+  text-align: center;
+  letter-spacing: -0.2px;
+}
+.login__popup .popup__body.joinok-h.webmail .joininfo .tit {
+  font-size: 14px;
+  color: #2a2c2f;
+}
+.login__popup .popup__body.joinok-h.webmail .joininfo .txt {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #7783a1;
+}
+.login__right.webmailok {
+  background: none;
+}
+.login__right.webmailok h2 p:first-child.tit {
+  display: block;
+}
+.login__right.webmailok .login__form .login__info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 22px;
+  text-align: center;
+  color: #2a2c2f;
+}
+.login__right.webmailok .login__form .login__info::before {
+  content: "";
+  margin: 35px 0 39px;
+  width: 100px;
+  height: 100px;
+  background: url("../img/bg_loginok.png") no-repeat center center;
+  background-size: 100%;
+}
+.login__right.webmailok .login__form .login__info + .btn-login {
+  margin-top: 23px;
+}
+
+/* 회원가입_이용약관 */
+.terms {
+  display: flex;
+  flex-direction: column;
+}
+.terms li {
+  display: flex;
+  flex-direction: column;
+}
+.terms li {
+  margin-top: 24px;
+}
+.terms li:first-child {
+  margin-top: 0;
+}
+.terms .terms__tit {
+  font-size: 15px;
+  font-weight: 700;
+  color: #2a2c2f;
+  margin-bottom: 12px;
+}
+.terms .box-scroll {
+  border: 1px solid #909fb7;
+  border-radius: 4px;
+  padding: 6px 8px;
+  font-size: 13px;
+  height: 184px;
+  overflow-y: scroll;
+  background: #fff;
+}
+.terms p {
+  font-size: 13px;
+  line-height: 19.24px;
+  word-wrap: break-word;
+  word-break: break-all;
+  margin-bottom: 1rem;
+}
+.terms p strong {
+  font-weight: 700;
+}
+.terms p.tit {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20.72px;
+}
+.terms p.txt + p.tit {
+  padding-top: 2.25rem;
+}
+.terms .tit-middle {
+  font-weight: 700;
+  padding-top: 1rem;
+}
+.terms p.tit + p.tit-small {
+  padding-top: 0;
+}
+.terms p.tit-small {
+  font-weight: 400;
+  padding-top: 0.6rem;
+  margin-bottom: 0;
+}
+.terms .renewday {
+  color: #7783a1;
+}
+.terms .dot {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-bottom: 0;
+}
+.terms .dot::before {
+  content: "";
+  width: 4px;
+  height: 4px;
+  background-color: #222;
+  border-radius: 50%;
+  margin: 8px 8px 0 5px;
+}
+
+/********************************************** For small screen, 반응형 **********************************************/
+@media screen and (max-width: 1023px) {
+  .login__left {
+    display: none;
+  }
+  .login__right {
+    width: 100%;
+    height: auto;
+    min-height: calc(100vh - 40%);
+    padding: 20% 0;
+    background: url("../img/icon_logo_login_m.png") no-repeat 2rem 2.5rem;
+    background-size: 4.5rem 2.125rem;
+  }
+  .login__right h2 p:first-child {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .login__right h2 p:first-child span {
+    font-size: 1.375rem;
+    font-weight: 300;
+    color: #2a2c2f;
+  }
+  .login__right h2 p:first-child span:last-child {
+    font-size: 2.188rem;
+    font-weight: 700;
+    color: #003876;
+    margin-top: 24px;
+    height: 30px;
+    width: 284px;
+  }
+  .login__right h2 p:last-child {
+    display: none;
+  }
+  .join__sns button {
+    margin-left: 1.5rem;
+  }
+  .btn-login {
+    margin: 3.688rem 0 1rem;
+  }
+  .login__form .form__input {
+    margin: 4rem 0 1.938rem;
+  }
+  .login__form .form__input li {
+    margin-top: 0.5rem;
+  }
+  .join__sns button {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+  .join__sns button.kakao {
+    background: url("../img/icon_kakao@2x.png") no-repeat center center #fae34c;
+    background-size: 1.375rem;
+  }
+  .join__sns button.naver {
+    background: url("../img/icon_naver@2x.png") no-repeat center center #03c75a;
+    background-size: 1.25rem;
+  }
+}
+@media screen and (max-width: 500px) {
+  .login__popup.popup-layer {
+    /* position: absolute ; */
+    width: calc(100% - 2rem) !important;
+    padding: 0 1rem;
+    /* top: 0 !important;
+    left: 0 !important; */
+    /* min-height: calc(100vh - 71px); */
+    box-shadow: none;
+    background-color: #fff;
+    border-radius: 0;
+    overflow-y: auto;
+    /* min-height: 100%; */
+    justify-content: center;
+    align-items: center;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    padding-top: 121px;
+  }
+  .login__popup .popup__head {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    background-color: #fff;
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .login__popup .popup__head h1 {
+    font-size: 30px;
+    font-weight: 500;
+  }
+  .login__popup .popup__head .btn-close {
+    margin-bottom: 18px;
+  }
+  .login__popup .popup__body {
+    overflow-y: unset;
+    /* margin-top: 7.563rem; */
+    margin-top: 0;
+    padding: 0;
+    width: 100%;
+    min-height: calc(100vh - 225px);
+    /* min-height: calc(100vh - 225px); */
+    max-height: unset;
+    background-color: #fff;
+  }
+  .login__popup .popup__body.joinok-h {
+    padding: 0;
+  }
+  .form__input li {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-top: 1.25rem;
+  }
+  .form__input .input__area {
+    margin-left: 0;
+  }
+  .login__popup.popup-layer .popup__body .form__input label {
+    width: 100% !important;
+    margin-bottom: 8px;
+  }
+  .login__popup.popup-layer .popup__body .form__input .checkBox.column label {
+    width: auto !important;
+  }
+  .login__popup.popup-layer .popup__body .form__input .checkBox.column li.ml-50 label {
+    width: calc(100% - 70px) !important;
+  }
+  .login__popup .popup__footer {
+    padding-bottom: 3rem;
+    border-top: 0;
+  }
+  .login__popup .input-errortxt {
+    font-size: 13px;
+    top: 44px;
+  }
+  .login__popup .popup__body .form__input input[type="text"],
+  .login__popup .popup__body .form__input input[type="password"],
+  .login__popup .popup__body .form__input input[type="tel"],
+  .login__popup .select {
+    height: 40px;
+    font-size: 1rem;
+  }
+
+  .login__popup .popup__body .form__input input[type="text"].input-error,
+  .login__popup .popup__body .form__input input[type="password"].input-error,
+  .login__popup .popup__body .form__input input[type="tel"].input-error {
+    background: none;
+  }
+  .joinok {
+    margin: 0 !important;
+  }
+  .terms .terms__tit {
+    font-size: 1rem;
+  }
+  .login__popup .popup__body.joinok-h.webmail .joinok:before {
+    width: 100px;
+    height: 100px;
+  }
+  .login__popup .popup__body.joinok-h.webmail .complete-txt {
+    height: calc(75vh - 3rem);
+  }
+}
+@media screen and (max-width: 414px) {
+  .login__right {
+    min-height: calc(100vh - 80%);
+    padding: 40% 0;
+  }
+}
+@media screen and (max-width: 390px) {
+  #login {
+    width: calc(100% - 2.5rem);
+    height: auto;
+    min-height: auto;
+    margin: 13% auto 20%;
+  }
+  .login__right {
+    height: auto;
+    min-height: auto;
+    padding: 0;
+    background-size: 2.8rem;
+    background-position: 0.25rem 0;
+  }
+  .login__right h2 {
+    padding: 28% 0 0;
+  }
+  .login__form {
+    width: 100%;
+  }
+  .login__form .form__input {
+    margin: 2.5rem 0;
+  }
+  .login__form .form__input input[type="text"],
+  .login__form .form__input input[type="password"] {
+    width: calc(100% - 2.125rem);
+  }
+  .btn-login {
+    margin: 2.5rem 0 1rem;
+    width: 100%;
+  }
+  .join__sns {
+    margin: 2rem 0 2.5rem;
+  }
+  .select-lang button {
+    margin-left: 2.75rem;
+  }
+  .login__popup .popup__body {
+    /* margin-top: 4.5rem; */
+  }
+}
+@media screen and (max-width: 320px) {
+  .login__right {
+    background-size: 2.8rem;
+  }
+  .login__right h2 p:first-child span {
+    font-size: 1rem;
+  }
+  .login__right h2 p:first-child span:last-child {
+    font-size: 2rem;
+    margin-top: 20px;
+  }
+  .join li {
+    font-size: 0.875rem;
+  }
+  .join__sns button {
+    width: 3rem;
+    height: 3rem;
+  }
+  .select-lang button {
+    font-size: 0.875rem;
+  }
+  input[type="checkbox"] + label {
+    font-size: 0.875rem;
+    padding-left: 1.438rem;
+  }
+  input[type="checkbox"] + label:before {
+    width: 1.125rem;
+    height: 1.125rem;
+    top: -2px;
+  }
+  input[type="checkbox"]:checked + label:after {
+    top: -2px;
+  }
+}
+@media screen and (max-width: 319px) {
+  #login {
+    min-width: 16.875rem;
+    padding: 0 1.25rem;
+  }
+}
+
+/********************************************** background image size **********************************************/
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 2dppx) {
+  .join__sns button.kakao {
+    background-image: url("../img/icon_kakao@2x.png");
+  }
+  .join__sns button.naver {
+    background-image: url("../img/icon_naver@2x.png");
+  }
+  /* .login__right {
+    background-image: url("../img/icon_logo_login_m@2x.png");
+  } */
+  .form__input input[type="text"].input-error,
+  .form__input input[type="password"].input-error,
+  .form__input input[type="tel"].input-error {
+    background-image: url("../img/icon_error@2x.png");
+  }
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-pixel-ratio: 3), only screen and (min-resolution: 3dppx) {
+  .join__sns button.kakao {
+    background-image: url("../img/icon_kakao@3x.png");
+  }
+  .join__sns button.naver {
+    background-image: url("../img/icon_naver@3x.png");
+  }
+  /* .login__right {
+    background-image: url("../img/icon_logo_login_m@3x.png");
+  } */
+  .form__input input[type="text"].input-error,
+  .form__input input[type="password"].input-error,
+  .form__input input[type="tel"].input-error {
+    background-image: url("../img/icon_error@3x.png");
+  }
+}

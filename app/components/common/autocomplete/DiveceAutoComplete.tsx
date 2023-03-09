@@ -1,0 +1,81 @@
+/*
+* Copyright (c) 2022 LS ELECTRIC Co. Ltd. All Reserved. 
+*/
+/*******************************************************************
+ * @author JiHoon Park
+ * @contact jhpark@detech.co.kr
+ * @date 2022-07-19
+ * @brief EHP 기기등록 자동완성 개발
+ *
+ ********************************************************************/
+import React, { useEffect, useRef, useState } from "react";
+
+// utils
+import clog from "../../../utils/logUtils";
+
+/**
+ * @brief EHP 기기등록 관리 자동완성 컴포넌트
+ * @param - 
+ * @returns react components
+ */
+
+
+function DiveceAutoComplete(props) {
+  const wordList = props.workList; //autofield
+  const autoInfo = props.autoInfo;
+  const setParentAutoInfo = props.setAutoInfo;
+  const resetParentAutoInfo = props.resetAutoInfo;
+  const errorList = props.errorList;
+  const errorField = props.errorField;
+  const id = props.id
+
+  const initKeyword = props.hasOwnProperty("initKeyword")?props.initKeyword:"";
+  const [keyword, setKeyword] = useState(initKeyword);
+
+  function handleSelectKeyword(e, autoInfo) {
+    setKeyword("");
+    setParentAutoInfo(autoInfo);
+  }
+
+  function handleOnChange(e) {
+    resetParentAutoInfo();
+    setKeyword(e.target.value);
+  }
+
+
+  return (
+  <>
+  <input type="text" id={"inp"+id} 
+    className={(errorList)&&(errorList.filter(err=>(err.field===errorField)).length>0)?"input-error":""}
+    placeholder="클릭하여 입력해주세요"
+    value={(autoInfo)?autoInfo:keyword}
+    onChange={(e)=>handleOnChange(e)}
+  />
+  <p className="input-errortxt">{(errorList)&&errorList.filter(err=>(err.field===errorField)).map((err)=>err.msg)}</p>
+
+  <ul className="autocomplete-box" style={{"display" : `${(keyword.length>0)?"":"none"}`}}>
+    {wordList.filter(word=>(word.toUpperCase().includes(keyword.toUpperCase()))).map((word, idx)=>(
+    <li key={`autofield_${idx.toString()}`}
+        onClick={(e)=>handleSelectKeyword(e, word)}
+    >
+      <a href="#">
+        {word.substring(0, word.toUpperCase().indexOf(keyword.toUpperCase()))}
+        <span className="highlight">{
+            word.substring(
+                word.toUpperCase().indexOf(keyword.toUpperCase()), 
+                word.toUpperCase().indexOf(keyword.toUpperCase())+keyword.length)
+        }
+        </span>
+        {word.substring(word.toUpperCase().indexOf(keyword.toUpperCase())+keyword.length)}
+      </a>
+    </li>
+    ))}
+  </ul>
+  </>
+  )
+}
+
+
+export default DiveceAutoComplete;
+
+

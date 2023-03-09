@@ -1,0 +1,258 @@
+{
+  "success": "true",
+  "msg": "success",
+  "data": [
+    {
+      "id": 1,
+      "name": "LS청주",
+      "zone": [
+        {
+          "zoneId": "청주1공장",
+          "zoneName": "청주1공장",
+          "room": [
+            {
+              "roomId": "청주1공장:전기실1",
+              "roomName": "전기실1",
+              "spg": [
+                {
+                  "spgId": 10,
+                  "spgName": "VCB"
+                },
+                {
+                  "spgId": 11,
+                  "spgName": "ACB"
+                },
+                {
+                  "spgId": 12,
+                  "spgName": "Mold TR"
+                },
+                {
+                  "spgId": 13,
+                  "spgName": "GIS"
+                },
+                {
+                  "spgId": 14,
+                  "spgName": "유입식 TR"
+                },
+                {
+                  "spgId": 15,
+                  "spgName": "배전반"
+                }
+              ]
+            },
+            {
+              "roomId": "청주1공장:전기실2",
+              "roomName": "전기실2",
+              "spg": [
+                {
+                  "spgId": 16,
+                  "spgName": "VCB"
+                },
+                {
+                  "spgId": 17,
+                  "spgName": "ACB"
+                },
+                {
+                  "spgId": 18,
+                  "spgName": "Mold TR"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "zoneId": "청주2공장",
+          "zoneName": "청주2공장",
+          "room": [
+            {
+              "roomId": "청주2공장:전기실1",
+              "roomName": "전기실1",
+              "spg": [
+                {
+                  "spgId": 19,
+                  "spgName": "VCB"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "LS대전",
+      "zone": [
+        {
+          "zoneId": "대전1공장",
+          "zoneName": "대전1공장",
+          "room": [
+            {
+              "roomId": "대전1공장:전기실1",
+              "roomName": "전기실1",
+              "spg": [
+                {
+                  "spgId": 20,
+                  "spgName": "VCB"
+                },
+                {
+                  "spgId": 21,
+                  "spgName": "ACB"
+                },
+                {
+                  "spgId": 22,
+                  "spgName": "Mold TR"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "zoneId": "대전2공장",
+          "zoneName": "대전2공장",
+          "room": [
+            {
+              "roomId": "대전2공장:전기실1",
+              "roomName": "전기실1",
+              "spg": [
+                {
+                  "spgId": 23,
+                  "spgName": "VCB"
+                },
+                {
+                  "spgId": 24,
+                  "spgName": "ACB"
+                },
+                {
+                  "spgId": 25,
+                  "spgName": "Mold TR"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "LS인천",
+      "zone": [
+        {
+          "zoneId": "인천1공장",
+          "zoneName": "인천1공장",
+          "room": [
+            {
+              "roomId": "인천1공장:전기실1",
+              "roomName": "전기실1",
+              "spg": [
+                {
+                  "spgId": 30,
+                  "spgName": "VCB"
+                },
+                {
+                  "spgId": 31,
+                  "spgName": "ACB"
+                },
+                {
+                  "spgId": 32,
+                  "spgName": "Mold TR"
+                },
+                {
+                  "spgId": 33,
+                  "spgName": "GIS"
+                },
+                {
+                  "spgId": 34,
+                  "spgName": "유입식 TR"
+                },
+                {
+                  "spgId": 35,
+                  "spgName": "배전반"
+                }
+              ]
+            },
+            {
+              "roomId": "인천1공장:전기실2",
+              "roomName": "전기실2",
+              "spg": [
+                {
+                  "spgId": 36,
+                  "spgName": "VCB"
+                },
+                {
+                  "spgId": 37,
+                  "spgName": "ACB"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "zoneId": "인천2공장",
+          "zoneName": "인천2공장",
+          "room": [
+            {
+              "roomId": "인천2공장:전기실1",
+              "roomName": "전기실1",
+              "spg": [
+                {
+                  "spgId": 38,
+                  "spgName": "VCB"
+                },
+                {
+                  "spgId": 39,
+                  "spgName": "Mold TR"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "LS서울",
+      "zone": [
+        {
+          "zoneId": "서울1공장",
+          "zoneName": "서울1공장",
+          "room": [
+            {
+              "roomId": "서울1공장:전기실1",
+              "roomName": "전기실1",
+              "spg": [
+                {
+                  "spgId": 40,
+                  "spgName": "VCB"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "zoneId": "서울2공장",
+          "zoneName": "서울2공장",
+          "room": [
+            {
+              "roomId": "서울2공장:전기실1",
+              "roomName": "전기실1",
+              "spg": [
+                {
+                  "spgId": 41,
+                  "spgName": "VCB"
+                },
+                {
+                  "spgId": 42,
+                  "spgName": "ACB"
+                },
+                {
+                  "spgId": 43,
+                  "spgName": "Mold TR"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
