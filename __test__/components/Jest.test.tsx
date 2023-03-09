@@ -1,6 +1,6 @@
 import React from 'react';
 import "@testing-library/jest-dom";
-import {  act } from '@testing-library/react-hooks';
+import { renderHook, act } from '@testing-library/react-hooks';
 import { fireEvent, render, waitFor, screen } from "@testing-library/react";
 import { BrowserRouter as Router, MemoryRouter } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
@@ -10,8 +10,13 @@ import DndDashboardLayout from '../../app/components/layout/DndDashboardLayout';
 import axios from 'axios';
 import { useAsync } from "react-async";
 import * as HttpUtil from '../../app/utils/api/HttpUtil';
+import MockAdapter from 'axios-mock-adapter';
+import { APIBASE_DEV } from '../../app/utils/api/HttpConf';
 
-
+// axios 인스턴스 생성
+const instance = axios.create({
+    baseURL: APIBASE_DEV,
+});
 
 // 다국어 적용
 jest.mock('react-i18next', () => ({
@@ -19,32 +24,33 @@ jest.mock('react-i18next', () => ({
 }));
 // API 적용
 jest.mock('date-fns');
-const mock = jest.mock("axios");
+jest.mock("axios");
+const mock = new MockAdapter(instance);
 describe('로그인 테스트', () => {
+
+
     afterEach(() => {
-        mock.resetAllMocks();
-    })
-    const { rerender } = render(
-        <MemoryRouter>
-            <RecoilRoot>
-                <Login />
-            </RecoilRoot>
-        </MemoryRouter>
-
-    );
-
-    const data = {
-        userId: "test@test.com",
-        userPw: "1234qwer!@"
-    }
-    const loginResponse = {
-        status: "success",
-        token: "testtoken"
-    }
-
-
+        mock.reset();
+    });
     // const 
     it('로그인 성공 테스트', async () => {
+        const { rerender } = render(
+            <MemoryRouter>
+                <RecoilRoot>
+                    <Login />
+                </RecoilRoot>
+            </MemoryRouter>
+
+        );
+
+        const data = {
+            userId: "test@test.com",
+            userPw: "1234qwer!@"
+        }
+        const loginResponse = {
+            status: "success",
+            token: "testtoken"
+        }
 
         const userId = screen.getByLabelText('아이디 입력') as HTMLInputElement;
         const userPw = screen.getByLabelText('비밀번호 입력') as HTMLInputElement;
@@ -56,7 +62,18 @@ describe('로그인 테스트', () => {
 
 
         await act(async () => {
-    
+            const { result } = renderHook(() => useAsync({
+                deferFn: HttpUtil.Http,
+                httpMethod: "POST",
+                appPath: "/api/v2/auth/login",
+                appQuery: {
+                    userId: userId.value,
+                    password: userPw.value,
+                },
+            })
+            );
+            console.log("gdata", JSON.stringify(result.error));
+            expect(result).toBeTruthy();
             expect(userId.value).toEqual(data.userId)
             expect(userPw.value).toEqual(data.userPw)
             expect(button).toBeEnabled()
@@ -108,3 +125,25 @@ describe('로그인 테스트', () => {
 
 
 });
+
+
+/* 
+HttpUtil.PromiseHttp({
+      httpMethod: "POST",
+      appPath: "/api/v2/user",
+      appQuery: {
+        userId: userId,
+        password: password + confirmPassword, // password 와 confirmPassword 가 다르면 error 만든 비동기 api
+        userName: userName,
+        phoneNumber: phoneNumber,
+        companyName: companyName,
+        zoneName: zoneName,
+        department: department,
+        classificationCode: classificationCode, // 20221031 업종 추가
+        agreeTos: strAgreeTos,
+        agreePersonalInfo: strAgreePersonalInfo,
+        agreeData: strAgreeData,
+        // agreeMailReceipt: strAgreeMailReceipt,
+        language: apiLang
+      },
+*/
