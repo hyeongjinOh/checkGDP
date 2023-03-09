@@ -1,6 +1,5 @@
 import React from 'react';
 import "@testing-library/jest-dom";
-import { renderHook, act } from '@testing-library/react-hooks';
 import { fireEvent, render, waitFor, screen } from "@testing-library/react";
 import { BrowserRouter as Router, MemoryRouter } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
@@ -9,8 +8,10 @@ import * as CONST from "../../app/utils/Const";
 import DndDashboardLayout from '../../app/components/layout/DndDashboardLayout';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import { useAsync } from "react-async";
-import * as HttpUtil from '../../app/utils/api/HttpUtil';
+import { APIBASE_DEV } from '../../app/utils/api/HttpConf';
+
+
+const apiUrl = APIBASE_DEV + "/api/v2/auth/login"
 
 
 // 다국어 적용
@@ -25,16 +26,14 @@ jest.mock("axios");
 describe('로그인 테스트', () => {
 
     const mock = new MockAdapter(axios);
-    const onSuccess = jest.fn();
-    const onError = jest.fn();
-
-    beforeEach(() => {
-        jest.clearAllMocks();
-    });
-
+    const data = {
+        userId: "test@test.com",
+        userPw: "1234qwer!@"
+    }
     afterAll(() => {
         mock.restore();
     });
+    mock.onPost("/api/v2/auth/login").reply(200, data);
 
     const { rerender } = render(
         <MemoryRouter>
@@ -44,12 +43,6 @@ describe('로그인 테스트', () => {
         </MemoryRouter>
 
     );
-
-    const data = {
-        userId: "test@test.com",
-        userPw: "1234qwer!@"
-    }
-    // const 
     it('로그인 성공 테스트', async () => {
 
         const userId = screen.getByLabelText('아이디 입력') as HTMLInputElement;
@@ -58,44 +51,29 @@ describe('로그인 테스트', () => {
 
         fireEvent.change(userId, { target: { value: 'test@test.com' } });
         fireEvent.change(userPw, { target: { value: '1234qwer!@' } });
-       
+
         fireEvent.click(button);
+      
 
-        const token = { token: '1234' };
-        mock.onPost('/api/v2/auth/login', { userId:userId.value, password: userPw.value }).reply(200, token);
-        await act(async () => {
-            const { result,waitForNextUpdate } = renderHook(() =>  useAsync({
-                deferFn: HttpUtil.Http,
-                httpMethod: "POST",
-                appPath: "/api/v2/auth/login",
-                appQuery: {
-                    userId: userId.value,
-                    password: userPw.value,
-                },
-                onSuccess,
-                onError,
-            })
-            );
-
-            console.log("gdata", result);
-            expect(result).toBeTruthy();
-            expect(userId.value).toEqual(data.userId)
-            expect(userPw.value).toEqual(data.userPw)
-            expect(button).toBeEnabled()
+        // expect(result).toBeTruthy();
+        expect(userId.value).toEqual(data.userId)
+        expect(userPw.value).toEqual(data.userPw)
+        expect(button).toBeEnabled()
 
 
-            waitFor(() => {
-                const successMessage = window.location.pathname;
-                expect(successMessage).toBe("/");
-            });
-            rerender(
-                <MemoryRouter>
-                    <RecoilRoot>
-                        <DndDashboardLayout />
-                    </RecoilRoot>
-                </MemoryRouter>
-            )
+        await waitFor(() => {
+            console.log("api",);
+            
+            const successMessage = window.location.pathname;
+            expect(successMessage).toBe("/");
         });
+        rerender(
+            <MemoryRouter>
+                <RecoilRoot>
+                    <DndDashboardLayout />
+                </RecoilRoot>
+            </MemoryRouter>
+        )
     });
     // it('로그인 실패 테스트', async () => {
 
