@@ -1,5 +1,6 @@
 import React from 'react';
 import "@testing-library/jest-dom";
+import {  act } from '@testing-library/react-hooks';
 import { fireEvent, render, waitFor, screen } from "@testing-library/react";
 import { BrowserRouter as Router, MemoryRouter } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
@@ -7,34 +8,22 @@ import Login from '../../app/components/login/Login';
 import * as CONST from "../../app/utils/Const";
 import DndDashboardLayout from '../../app/components/layout/DndDashboardLayout';
 import axios from 'axios';
-import MockAdapter from 'axios-mock-adapter';
-import { APIBASE_DEV } from '../../app/utils/api/HttpConf';
+import { useAsync } from "react-async";
+import * as HttpUtil from '../../app/utils/api/HttpUtil';
 
-
-const apiUrl = APIBASE_DEV + "/api/v2/auth/login"
 
 
 // 다국어 적용
 jest.mock('react-i18next', () => ({
     useTranslation: () => ({ t: key => key })
 }));
-
-jest.mock('date-fns');
 // API 적용
-jest.mock("axios");
-
+jest.mock('date-fns');
+const mock = jest.mock("axios");
 describe('로그인 테스트', () => {
-
-    const mock = new MockAdapter(axios);
-    const data = {
-        userId: "test@test.com",
-        userPw: "1234qwer!@"
-    }
-    afterAll(() => {
-        mock.restore();
-    });
-    mock.onPost("/api/v2/auth/login").reply(200, data);
-
+    afterEach(() => {
+        mock.resetAllMocks();
+    })
     const { rerender } = render(
         <MemoryRouter>
             <RecoilRoot>
@@ -43,6 +32,18 @@ describe('로그인 테스트', () => {
         </MemoryRouter>
 
     );
+
+    const data = {
+        userId: "test@test.com",
+        userPw: "1234qwer!@"
+    }
+    const loginResponse = {
+        status: "success",
+        token: "testtoken"
+    }
+
+
+    // const 
     it('로그인 성공 테스트', async () => {
 
         const userId = screen.getByLabelText('아이디 입력') as HTMLInputElement;
@@ -51,29 +52,28 @@ describe('로그인 테스트', () => {
 
         fireEvent.change(userId, { target: { value: 'test@test.com' } });
         fireEvent.change(userPw, { target: { value: '1234qwer!@' } });
-
         fireEvent.click(button);
-      
-
-        // expect(result).toBeTruthy();
-        expect(userId.value).toEqual(data.userId)
-        expect(userPw.value).toEqual(data.userPw)
-        expect(button).toBeEnabled()
 
 
-        await waitFor(() => {
-            console.log("api",);
-            
-            const successMessage = window.location.pathname;
-            expect(successMessage).toBe("/");
+        await act(async () => {
+    
+            expect(userId.value).toEqual(data.userId)
+            expect(userPw.value).toEqual(data.userPw)
+            expect(button).toBeEnabled()
+
+
+            waitFor(() => {
+                const successMessage = window.location.pathname;
+                expect(successMessage).toBe("/");
+            });
+            rerender(
+                <MemoryRouter>
+                    <RecoilRoot>
+                        <DndDashboardLayout />
+                    </RecoilRoot>
+                </MemoryRouter>
+            )
         });
-        rerender(
-            <MemoryRouter>
-                <RecoilRoot>
-                    <DndDashboardLayout />
-                </RecoilRoot>
-            </MemoryRouter>
-        )
     });
     // it('로그인 실패 테스트', async () => {
 
@@ -108,25 +108,3 @@ describe('로그인 테스트', () => {
 
 
 });
-
-
-/* 
-HttpUtil.PromiseHttp({
-      httpMethod: "POST",
-      appPath: "/api/v2/user",
-      appQuery: {
-        userId: userId,
-        password: password + confirmPassword, // password 와 confirmPassword 가 다르면 error 만든 비동기 api
-        userName: userName,
-        phoneNumber: phoneNumber,
-        companyName: companyName,
-        zoneName: zoneName,
-        department: department,
-        classificationCode: classificationCode, // 20221031 업종 추가
-        agreeTos: strAgreeTos,
-        agreePersonalInfo: strAgreePersonalInfo,
-        agreeData: strAgreeData,
-        // agreeMailReceipt: strAgreeMailReceipt,
-        language: apiLang
-      },
-*/
